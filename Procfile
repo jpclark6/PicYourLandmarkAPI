@@ -1,1 +1,1 @@
-web: gunicorn picyourlandmarkapi.wsgi
+web: gunicorn PicYourLandmarkAPI.wsgi --log-file -
