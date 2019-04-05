@@ -14,8 +14,8 @@ class LandmarksFacade:
       lon = place["Place"]["Locations"][0]["DisplayPosition"]["Longitude"]
       Locations.objects.get_or_create(
         name=name,
-        latitude=lat,
-        longitude=lon
+        lat=lat,
+        lon=lon
       )
     return Locations.objects.all()
 
