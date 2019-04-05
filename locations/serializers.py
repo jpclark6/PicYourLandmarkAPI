@@ -4,4 +4,4 @@ from .models import Locations
 class LocationsSerializer(serializers.ModelSerializer):
   class Meta:
     model = Locations
-    fields = ("id", "name", "latitude", "longitude")
+    fields = ("id", "name", "lat", "lon")
