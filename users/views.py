@@ -18,6 +18,10 @@ class AddUsersView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def get(self, request, *args, **kwargs):
+        user = Users.objects.get(email=request.query_params.get('email'))
+        serializer = UsersSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class AddUsersLandmark(APIView):
     """
