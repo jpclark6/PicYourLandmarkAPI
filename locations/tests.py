@@ -13,6 +13,5 @@ class LocationsFromLatLonTest(APITestCase):
     response = self.client.get(
       '/api/v1/locations/?lat=39.818355&lon=-105.076521'
     )
-    import pdb
-    pdb.set_trace()
+
     self.assertEqual(1, 1)
