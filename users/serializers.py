@@ -18,4 +18,4 @@ class UsersSerializer(serializers.ModelSerializer):
     locations = LocationsSerializer(many=True, required=False)
     class Meta:
         model = Users
-        fields = ("email", "username", "locations")
+        fields = ("id", "email", "username", "locations")
