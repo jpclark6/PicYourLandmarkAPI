@@ -27,6 +27,7 @@ class AddUsersView(APIView):
             full_loc = Locations.objects.get(pk=loc.locations_id)
             return_hash['user_locations'].append({
                 'name': full_loc.name,
+                'description': full_loc.description,
                 'lat': full_loc.lat,
                 'lon': full_loc.lon,
                 'landmark_id': loc.locations_id,
@@ -51,6 +52,7 @@ class AddUsersLandmark(APIView):
             full_loc = Locations.objects.get(pk=loc.locations_id)
             return_hash['user_locations'].append({
                 'name': full_loc.name,
+                'description': full_loc.description,
                 'lat': full_loc.lat,
                 'lon': full_loc.lon,
                 'landmark_id': loc.locations_id,
