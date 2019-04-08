@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from locations.models import Locations
 from .models import Users, UserLocations
-from .serializers import UsersSerializer
+from .serializers import UsersSerializer, UserLocationsSerializer
 # Create your views here.
 class AddUsersView(APIView):
     """
@@ -20,8 +20,11 @@ class AddUsersView(APIView):
 
     def get(self, request, *args, **kwargs):
         user = Users.objects.get(email=request.query_params.get('email'))
-        serializer = UsersSerializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        user_locations = UserLocations.objects.filter(users_id=user.id)
+        return_hash = {'user_locations': []}
+        for loc in user_locations:
+            return_hash['user_locations'].append({'user_id': loc.users_id, 'landmark_id': loc.locations_id, 'photo_url': loc.photo_url})
+        return Response(return_hash, status=status.HTTP_200_OK)
 
 class AddUsersLandmark(APIView):
     """
