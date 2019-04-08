@@ -20,9 +20,13 @@ class AddUsersView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, *args, **kwargs):
+
         user = Users.objects.get(username=request.query_params.get('username'))
-        serializer = UsersSerializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        user_locations = UserLocations.objects.filter(users_id=user.id)
+        return_hash = {'user_locations': []}
+        for loc in user_locations:
+            return_hash['user_locations'].append({'user_id': loc.users_id, 'landmark_id': loc.locations_id, 'photo_url': loc.photo_url})
+        return Response(return_hash, status=status.HTTP_200_OK)
 
 class AddUsersLandmark(APIView):
     """

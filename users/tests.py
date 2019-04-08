@@ -57,6 +57,10 @@ class GetUserLandmarksTest(APITestCase):
         response = self.client.get(
             f'/api/v1/users/?username={username}&password={password}', format='json'
         )
+<<<<<<< HEAD
         self.assertEqual(response.data['email'], email)
         self.assertEqual(response.data['username'], username)
         self.assertEqual(response.data['locations'][0]['name'], loc_name)
+=======
+        self.assertEqual(response.data['user_locations'][0]['photo_url'], 'website.com')
+>>>>>>> c88e810b7086a577f32f13c0a1d60acb86a1cc28
