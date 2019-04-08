@@ -10,7 +10,7 @@ Starting endpoint at https://pic-landmark-api.herokuapp.com
 
 Include latitude and longitude to get top 10 results added to full database of locations.
 
-Ex. GET 
+Ex. GET /api/v1/locations/?lat=39.719683&lon=-104.498445
 
 Returns:
 
@@ -20,18 +20,21 @@ Returns:
     {
         "id": 18,
         "name": "Fairmount Cemetery",
+        "description": "Good cemetary",
         "lat": 39.70553,
         "lon": -104.89692
     },
     {
         "id": 19,
         "name": "Crescent Park",
+        "description": "Ok park",
         "lat": 39.72875,
         "lon": -104.90018
     },
     {
         "id": 20,
         "name": "Crestmoor Park",
+        "description": "Better park",
         "lat": 39.71309,
         "lon": -104.91708
     }
