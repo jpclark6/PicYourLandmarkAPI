@@ -11,15 +11,16 @@ class AddUsersView(APIView):
     """
     def post(self, request, *args, **kwargs):
         email = request.query_params.get('email') 
+        username = request.query_params.get('username') 
         password_hash = request.query_params.get('password') 
-        serializer = UsersSerializer(data={'email': email, 'password_hash': password_hash})
+        serializer = UsersSerializer(data={'email': email, 'username': username, 'password_hash': password_hash})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, *args, **kwargs):
-        user = Users.objects.get(email=request.query_params.get('email'))
+        user = Users.objects.get(username=request.query_params.get('username'))
         serializer = UsersSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -34,4 +35,5 @@ class AddUsersLandmark(APIView):
         user = Users.objects.get(pk=user_id)
         landmark = Locations.objects.get(pk=landmark_id)
         UserLocations.objects.create(users=user, locations=landmark, photo_url=photo_url)
-        return Response({'status': 'ok'}, status=status.HTTP_201_CREATED)
+        serializer = UsersSerializer(user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
