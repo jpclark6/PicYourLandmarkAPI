@@ -16,4 +16,3 @@ class LocationsIndexView(generics.ListAPIView):
         return LandmarksFacade(lat, lon).get_landmarks_list()
 
     serializer_class = LocationsSerializer
-
