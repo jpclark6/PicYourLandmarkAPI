@@ -67,6 +67,7 @@ Returns list of user's locations:
     "user_locations": [
         {
             "name": "Great Lawn Park",
+            "description": "Beautiful Park",
             "lat": 39.72386,
             "lon": -104.88715,
             "landmark_id": 6,
@@ -74,6 +75,7 @@ Returns list of user's locations:
         },
         {
             "name": "Buckley Annex",
+            "description": "Beautiful Park",
             "lat": 39.7159,
             "lon": -104.90379,
             "landmark_id": 3,
@@ -94,6 +96,7 @@ Ex. GET /api/v1/users/?username=joe55&password=abc123
     "user_locations": [
         {
             "name": "Great Lawn Park",
+            "description": "Beautiful Park",
             "lat": 39.72386,
             "lon": -104.88715,
             "landmark_id": 6,
@@ -101,6 +104,7 @@ Ex. GET /api/v1/users/?username=joe55&password=abc123
         },
         {
             "name": "Buckley Annex",
+            "description": "Beautiful Park",
             "lat": 39.7159,
             "lon": -104.90379,
             "landmark_id": 3,
