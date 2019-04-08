@@ -20,12 +20,18 @@ class AddUsersView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, *args, **kwargs):
-
         user = Users.objects.get(username=request.query_params.get('username'))
         user_locations = UserLocations.objects.filter(users_id=user.id)
-        return_hash = {'user_locations': []}
+        return_hash = {'user_id': user.id, 'username': user.username,'user_locations': []}
         for loc in user_locations:
-            return_hash['user_locations'].append({'user_id': loc.users_id, 'landmark_id': loc.locations_id, 'photo_url': loc.photo_url})
+            full_loc = Locations.objects.get(pk=loc.locations_id)
+            return_hash['user_locations'].append({
+                'name': full_loc.name,
+                'lat': full_loc.lat,
+                'lon': full_loc.lon,
+                'landmark_id': loc.locations_id,
+                'photo_url': loc.photo_url,
+                })
         return Response(return_hash, status=status.HTTP_200_OK)
 
 class AddUsersLandmark(APIView):
@@ -39,5 +45,15 @@ class AddUsersLandmark(APIView):
         user = Users.objects.get(pk=user_id)
         landmark = Locations.objects.get(pk=landmark_id)
         UserLocations.objects.create(users=user, locations=landmark, photo_url=photo_url)
-        serializer = UsersSerializer(user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        user_locations = UserLocations.objects.filter(users_id=user.id)
+        return_hash = {'user_id': user.id, 'username': user.username, 'user_locations': []}
+        for loc in user_locations:
+            full_loc = Locations.objects.get(pk=loc.locations_id)
+            return_hash['user_locations'].append({
+                'name': full_loc.name,
+                'lat': full_loc.lat,
+                'lon': full_loc.lon,
+                'landmark_id': loc.locations_id,
+                'photo_url': loc.photo_url,
+                })
+        return Response(return_hash, status=status.HTTP_200_OK)

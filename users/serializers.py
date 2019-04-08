@@ -15,8 +15,7 @@ class UsersSerializer(serializers.ModelSerializer):
     """
     This is a serializer for user
     """
-    user_locations = UserLocationsSerializer(many=True, required=False)
     locations = LocationsSerializer(many=True, required=False)
     class Meta:
         model = Users
-        fields = ("email", "locations", "user_locations")
+        fields = ("email", "username", "locations")
