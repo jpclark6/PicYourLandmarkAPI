@@ -1,7 +1,10 @@
 from django.db import models
 
-# Create your models here.
+
 class Locations(models.Model):
+    """
+    Locations AKA landmarks model
+    """
     name = models.CharField(max_length=40)
     description = models.CharField(max_length=200, null=True, blank=True)
     lat = models.FloatField()

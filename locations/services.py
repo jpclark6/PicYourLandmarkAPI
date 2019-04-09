@@ -1,11 +1,18 @@
 import requests
 
+
 class LandmarksService:
+    """
+    Pull json data from landmark API
+    """
     def __init__(self, lat, lon):
         self.lat = lat
         self.lon = lon
 
     def get_landmarks(self):
+        """
+        Get landmarks at lat/lng, return raw json from response
+        """
         url = 'https://geocoder.api.here.com/6.2/search.json' 
         params = {
             'app_id': 'OOmcFqk9piHFxjRmhdlt',
