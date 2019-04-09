@@ -9,6 +9,7 @@ class Users(models.Model):
     email = models.CharField(max_length=40, unique=True)
     username = models.CharField(max_length=40, unique=True)
     password_hash = models.CharField(max_length=60)
+    profile_url = models.CharField(max_length=120)
     locations = models.ManyToManyField(Locations, through='UserLocations', blank=True)
 
     def __str__(self):
