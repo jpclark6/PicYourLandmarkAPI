@@ -57,3 +57,22 @@ class AddUsersLandmark(APIView):
             return Response(return_hash, status=status.HTTP_200_OK)
         except:
             return Response({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateUser(APIView):
+    """
+    Add user profile picture
+    """
+    def patch(self, request, *args, **kwargs):
+        """
+        PATCH /api/v1/users/:id/
+        """
+        try:
+            profile_url = request.query_params.get('profile_url')
+            user = Users.objects.get(pk=kwargs["pk"])
+            user.profile_url = profile_url
+            user.save()
+            serializer = UsersSerializer(user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except:
+            return Response({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)

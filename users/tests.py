@@ -84,3 +84,22 @@ class GetUserLandmarksTest(APITestCase):
         )
         self.assertEqual(response.data['status'], 'error')
         self.assertEqual(response.status_code, 400)
+
+
+class UpdateUserTest(APITestCase):
+    """
+    Update user profile picture
+    """
+    client = APIClient()
+
+    def test_profile_url_updated(self):
+        url = 'website.com'
+        email = 'email'
+        username = 'username'
+        password = 'password'
+        user = Users.objects.create(email=email, username=username, password_hash=password)
+        response = self.client.patch(
+            f'/api/v1/users/{user.id}/?profile_url={url}', format='json'
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["profile_url"], url)
