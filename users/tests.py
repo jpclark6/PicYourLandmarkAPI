@@ -23,6 +23,13 @@ class CreateUsersTest(APITestCase):
         self.assertEqual(response.data['email'], email)
         self.assertEqual(response.data['username'], username)
 
+    def test_fails_gracefully_for_bad_user(self):
+        response = self.client.post(
+            f'/api/v1/users/'
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data['email'], ["This field may not be null."])
+
 
 class CreateUserLandmarksTest(APITestCase):
     """
@@ -42,6 +49,13 @@ class CreateUserLandmarksTest(APITestCase):
         )
         self.assertEqual(response.data['username'], 'username')
         self.assertEqual(response.data['user_locations'][0]['name'], 'Capitol')
+
+    def test_fails_gracefully_when_loc_fake(self):
+        response = self.client.post(
+            f'/api/v1/users/{4235}/landmarks/?url={24}&location={4251}'
+        )
+        self.assertEqual(response.data['status'], 'error')
+        self.assertEqual(response.status_code, 400)
 
 
 class GetUserLandmarksTest(APITestCase):
@@ -67,3 +81,10 @@ class GetUserLandmarksTest(APITestCase):
             f'/api/v1/users/?username={username}&password={password}', format='json'
         )
         self.assertEqual(response.data['user_locations'][0]['photo_url'], 'website.com')
+
+    def test_fails_gracefully_for_bad_location(self):
+        response = self.client.get(
+            f'/api/v1/users/?username=bob&password=none', format='json'
+        )
+        self.assertEqual(response.data['status'], 'error')
+        self.assertEqual(response.status_code, 400)
