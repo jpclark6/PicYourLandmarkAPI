@@ -11,7 +11,7 @@ class UsersSerializer(serializers.ModelSerializer):
     locations = LocationsSerializer(many=True, required=False)
     class Meta:
         model = Users
-        fields = ("id", "email", "username", "locations")
+        fields = ("id", "email", "username", "profile_url", "locations")
 
 
 class UserLocationsSerializer:
@@ -26,7 +26,7 @@ class UserLocationsSerializer:
         """
         Build json to return that includes all user locations with location data
         """
-        return_hash = {'user_id': self.user.id, 'username': self.user.username,'user_locations': []}
+        return_hash = {'user_id': self.user.id, 'username': self.user.username, 'profile_url': self.user.profile_url, 'user_locations': []}
         for loc in self.user_locations:
             full_loc = Locations.objects.get(pk=loc.locations_id)
             return_hash['user_locations'].append({
