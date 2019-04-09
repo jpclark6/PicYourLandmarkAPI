@@ -1,6 +1,6 @@
 # Pic Your Landmark API
 
-DIg into gogole api to see if it also includes description and if it is better overall
+This is a Django API to serve up the app [Pic Your Landmark](https://github.com/hlhartley/PicYourLandmark). It includes user creation, finding landmarks based on latitude and longitude, and saving those landmarks to your user profile with a link to a url for the picture associated with the landmark. 
 
 ## Endpoints
 
@@ -116,3 +116,59 @@ Ex. GET /api/v1/users/?username=joe55&password=abc123
     ]
 }
 ```
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed before installing the app:
+
+* Python 3.7
+* PostgreSQL
+* Pip3
+
+### Setup
+
+Run these commands in your terminal once you're in the directory you'd like to save the project:
+
+```
+git clone git@github.com:jpclark6/PicYourLandmarkAPI.git
+cd PicYourLandmarkAPI
+psql
+create database landmarks;
+quit
+pip3 install -r requirements.txt
+python3 manage.py migrate
+python3 manage.py runserver
+```
+
+## Running the Tests
+
+This app has most endpoints happy and sad path tested. To run the tests enter the following into the terminal:
+
+```
+python3 manage.py test
+```
+
+The tests test the endpoints and database to make sure everything is in working order. This is an example of the user creation test:
+
+```
+def test_create_a_user(self):
+        email = 'test1'
+        username = 'joe'
+        password = 'test2'
+        response = self.client.post(
+            f'/api/v1/users/?email={email}&username={username}&password={password}&password_confirmation={password}'
+        )
+        self.assertEqual(response.data['email'], email)
+        self.assertEqual(response.data['username'], username)
+```
+
+## Authors - Back End
+
+* Justin Clark - https://github.com/jpclark6
+
+## Authors - Front End
+
+* Heather Hartley - https://github.com/hlhartley
+* Matthew Foxwell - https://github.com/foxwellm

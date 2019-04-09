@@ -14,7 +14,7 @@ class CreateUsersTest(APITestCase):
         username = 'joe'
         password = 'test2'
         response = self.client.post(
-            f'/api/v1/users/?email={email}&username={username}&password={password}&password_confirmation=test2'
+            f'/api/v1/users/?email={email}&username={username}&password={password}&password_confirmation={password}'
         )
         self.assertEqual(response.data['email'], email)
         self.assertEqual(response.data['username'], username)
