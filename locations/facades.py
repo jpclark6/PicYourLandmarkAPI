@@ -1,6 +1,7 @@
 from .services import LandmarksService
 from .models import Locations
 
+
 class LandmarksFacade:
     """
     Build usable objects from landmark API service

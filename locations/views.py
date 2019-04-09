@@ -1,10 +1,8 @@
-from django.shortcuts import render
 from rest_framework import generics
-from .models import Locations
 from .serializers import LocationsSerializer
 from .facades import LandmarksFacade
 
-# Create your views here.
+
 class LocationsIndexView(generics.ListAPIView):
     """
     Locations Index

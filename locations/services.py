@@ -1,5 +1,6 @@
 import requests
 
+
 class LandmarksService:
     """
     Pull json data from landmark API

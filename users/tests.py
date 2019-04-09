@@ -1,10 +1,6 @@
-from django.test import TestCase
 from rest_framework.test import APITestCase, APIClient
-from rest_framework.views import status
 from locations.models import Locations
 from .models import Users, UserLocations
-from .serializers import UsersSerializer
-import json
 
 
 class CreateUsersTest(APITestCase):

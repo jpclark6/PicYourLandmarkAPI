@@ -1,7 +1,7 @@
 from django.db import models
 from locations.models import Locations
 
-# Create your models here.
+
 class Users(models.Model):
     """
     Basic user model
@@ -13,6 +13,7 @@ class Users(models.Model):
 
     def __str__(self):
         return self.username
+
 
 class UserLocations(models.Model):
     """
