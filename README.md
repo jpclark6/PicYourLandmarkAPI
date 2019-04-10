@@ -1,6 +1,6 @@
 # Pic Your Landmark API
 
-This is a Django API to serve up the app [Pic Your Landmark](https://github.com/hlhartley/PicYourLandmark). It includes user creation, finding landmarks based on latitude and longitude, and saving those landmarks to your user profile with a link to a url for the picture associated with the landmark. 
+This is a Django API to serve up the app [Pic Your Landmark](https://github.com/hlhartley/PicYourLandmark), React Native app. It includes user creation, finding landmarks based on latitude and longitude, and saving those landmarks to your user profile with a link to a url for the picture associated with the landmark. 
 
 ## Endpoints
 
@@ -11,6 +11,7 @@ Starting endpoint at https://pic-landmark-api.herokuapp.com
 Include latitude and longitude to get top 10 results added to full database of locations.
 
 GET */api/v1/locations/?lat=user_latitude&lon=user_longitude*
+
 Ex. GET */api/v1/locations/?lat=39.665196&lon=-105.205788*
 
 Returns:
@@ -46,6 +47,7 @@ Returns:
 #### Create A User
 
 POST */api/v1/users/?email=users_email&username=the_username&password=the_password&password_confirmation=the_password*
+
 Ex. POST */api/v1/users/?email=landmarker@example.com&username=landmarker&password=abc123&password_confirmation=abc123*
 
 Returns:
@@ -63,6 +65,7 @@ Returns:
 #### Update User Profile Photo
 
 PATCH */api/v1/users/:user_id/?profile_url=the_profile_url*
+
 Ex. PATCH */api/v1/users/27/?profile_url=www.newpicture.com*
 
 Returns:
@@ -80,6 +83,7 @@ Returns:
 #### Add Location To User
 
 POST */api/v1/users/:user_id/landmarks/?url=location_photo_url&location=location_id*
+
 Ex. POST */api/v1/users/27/landmarks/?url=www.pictureloc.com&location=73*
 
 Returns:
@@ -115,6 +119,7 @@ Returns:
 #### Get List Of User's Locations
 
 GET */api/v1/users/?username=the_username&password=the_password*
+
 Ex. GET */api/v1/users/?username=landmarker&password=abc123*
 
 Returns:
@@ -150,6 +155,7 @@ Returns:
 #### Update User's Photo For A Given Location
 
 PATCH */api/v1/users/:user_id/landmarks/:user_locations_id/?photo_url=new_url*
+
 Ex. PATCH */api/v1/users/27/landmarks/22/?photo_url=www.new_url.com*
 
 Returns:
