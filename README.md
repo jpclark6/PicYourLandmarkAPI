@@ -10,7 +10,8 @@ Starting endpoint at https://pic-landmark-api.herokuapp.com
 
 Include latitude and longitude to get top 10 results added to full database of locations.
 
-Ex. GET /api/v1/locations/?lat=39.719683&lon=-104.498445
+GET */api/v1/locations/?lat=user_latitude&lon=user_longitude*
+Ex. GET */api/v1/locations/?lat=39.665196&lon=-105.205788*
 
 Returns:
 
@@ -18,71 +19,94 @@ Returns:
 [
     ...
     {
-        "id": 18,
-        "name": "Fairmount Cemetery",
-        "description": "Good cemetary",
-        "lat": 39.70553,
-        "lon": -104.89692
+        "id": 73,
+        "name": "Matthews Winters Open Space Park",
+        "lat": 39.68431,
+        "lon": -105.21269,
+        "description": null
     },
     {
-        "id": 19,
-        "name": "Crescent Park",
-        "description": "Ok park",
-        "lat": 39.72875,
-        "lon": -104.90018
+        "id": 74,
+        "name": "South Dinosaur Open Space Park",
+        "lat": 39.66777,
+        "lon": -105.19186,
+        "description": null
     },
     {
-        "id": 20,
-        "name": "Crestmoor Park",
-        "description": "Better park",
-        "lat": 39.71309,
-        "lon": -104.91708
-    }
+        "id": 75,
+        "name": "Mt Falcon Open Space Park",
+        "lat": 39.65297,
+        "lon": -105.20353,
+        "description": null
+    },
     ...
 ]
 ```
 
 #### Create A User
 
-Ex. POST /api/v1/users/?email=joe44@example.com&username=joe55&password=abc123&password_confirmation=abc123
+POST */api/v1/users/?email=users_email&username=the_username&password=the_password&password_confirmation=the_password*
+Ex. POST */api/v1/users/?email=landmarker@example.com&username=landmarker&password=abc123&password_confirmation=abc123*
 
 Returns:
 
 ```
 {
-    "id": 4
-    "email": "joe44@example.com",
-    "username": "joe55",
+    "id": 27,
+    "email": "landmarker@example.com",
+    "username": "landmarker",
+    "profile_url": "",
+    "locations": []
+}
+```
+
+#### Update User Profile Photo
+
+PATCH */api/v1/users/:user_id/?profile_url=the_profile_url*
+Ex. PATCH */api/v1/users/27/?profile_url=www.newpicture.com*
+
+Returns:
+
+```
+{
+    "id": 27,
+    "email": "landmarker@example.com",
+    "username": "landmarker",
+    "profile_url": "www.newpicture.com",
     "locations": []
 }
 ```
 
 #### Add Location To User
 
-Ex. POST /api/v1/users/4/landmarks/?url=www.pictureloc.com&location=20
+POST */api/v1/users/:user_id/landmarks/?url=location_photo_url&location=location_id*
+Ex. POST */api/v1/users/27/landmarks/?url=www.pictureloc.com&location=73*
 
-Returns list of user's locations:
+Returns:
 
 ```
 {
-    "user_id": 1,
-    "username": "joe55",
+    "user_id": 27,
+    "username": "landmarker",
+    "profile_url": "www.newpicture.com",
     "user_locations": [
         {
-            "name": "Great Lawn Park",
-            "description": "Beautiful Park",
-            "lat": 39.72386,
-            "lon": -104.88715,
-            "landmark_id": 6,
-            "photo_url": "www.myimage.com/2"
+            "id": 22,
+            "name": "Matthews Winters Open Space Park",
+            "description": null,
+            "lat": 39.68431,
+            "lon": -105.21269,
+            "landmark_id": 73,
+            "photo_url": "www.pictureloc2.com"
         },
         {
-            "name": "Buckley Annex",
-            "description": "Beautiful Park",
-            "lat": 39.7159,
-            "lon": -104.90379,
-            "landmark_id": 3,
-            "photo_url": "www.myimage.com"
+            "id": 21,
+            "name": "Sand Creek Park",
+            "description": null,
+            "lat": 39.75478,
+            "lon": -104.84476,
+            "landmark_id": 64,
+            "photo_url": "www.pictureloc.com"
         }
     ]
 }
@@ -90,28 +114,69 @@ Returns list of user's locations:
 
 #### Get List Of User's Locations
 
-Ex. GET /api/v1/users/?username=joe55&password=abc123
+GET */api/v1/users/?username=the_username&password=the_password*
+Ex. GET */api/v1/users/?username=landmarker&password=abc123*
+
+Returns:
 
 ```
 {
-    "user_id": 1,
-    "username": "joe55",
+    "user_id": 27,
+    "username": "landmarker",
+    "profile_url": "www.newpicture.com",
     "user_locations": [
         {
-            "name": "Great Lawn Park",
-            "description": "Beautiful Park",
-            "lat": 39.72386,
-            "lon": -104.88715,
-            "landmark_id": 6,
-            "photo_url": "www.myimage.com/2"
+            "id": 22,
+            "name": "Matthews Winters Open Space Park",
+            "description": null,
+            "lat": 39.68431,
+            "lon": -105.21269,
+            "landmark_id": 73,
+            "photo_url": "www.pictureloc2.com"
         },
         {
-            "name": "Buckley Annex",
-            "description": "Beautiful Park",
-            "lat": 39.7159,
-            "lon": -104.90379,
-            "landmark_id": 3,
-            "photo_url": "www.myimage.com"
+            "id": 21,
+            "name": "Sand Creek Park",
+            "description": null,
+            "lat": 39.75478,
+            "lon": -104.84476,
+            "landmark_id": 64,
+            "photo_url": "www.pictureloc.com"
+        }
+    ]
+}
+```
+
+#### Update User's Photo For A Given Location
+
+PATCH */api/v1/users/:user_id/landmarks/:user_locations_id/?photo_url=new_url*
+Ex. PATCH */api/v1/users/27/landmarks/22/?photo_url=www.new_url.com*
+
+Returns:
+
+```
+{
+    "user_id": 27,
+    "username": "landmarker",
+    "profile_url": "www.newpicture.com",
+    "user_locations": [
+        {
+            "id": 22,
+            "name": "Matthews Winters Open Space Park",
+            "description": null,
+            "lat": 39.68431,
+            "lon": -105.21269,
+            "landmark_id": 73,
+            "photo_url": "www.new_url.com"
+        },
+        {
+            "id": 21,
+            "name": "Sand Creek Park",
+            "description": null,
+            "lat": 39.75478,
+            "lon": -104.84476,
+            "landmark_id": 64,
+            "photo_url": "www.pictureloc.com"
         }
     ]
 }
@@ -144,7 +209,7 @@ python3 manage.py runserver
 
 ## Running the Tests
 
-This app has most endpoints happy and sad path tested. To run the tests enter the following into the terminal:
+This app tests most endpoints with both happy and sad path testing. It also uses CircleCI for continuous integration. To run the tests enter the following into the terminal:
 
 ```
 python3 manage.py test
@@ -163,6 +228,14 @@ def test_create_a_user(self):
         self.assertEqual(response.data['email'], email)
         self.assertEqual(response.data['username'], username)
 ```
+
+## Tech
+
+* Django
+* rest_framework
+* gunicorn
+* PostgreSQL
+* CircleCI
 
 ## Authors - Back End
 
