@@ -76,3 +76,24 @@ class UpdateUser(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except:
             return Response({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UpdateUserLandmark(APIView):
+    """
+    Update user photo for a landmark
+    """
+    def patch(self, request, *args, **kwargs):
+        """
+        PATCH /api/v1/users/:id/locations/:id
+        """
+        try:
+            photo_url = request.query_params.get('photo_url')
+            user_landmark = UserLocations.objects.get(pk=kwargs["landmark_pk"])
+            user_landmark.photo_url = photo_url
+            user_landmark.save()
+            user = Users.objects.get(pk=kwargs["user_pk"])
+            user_locations = UserLocations.objects.filter(users_id=user.id)
+            return_hash = UserLocationsSerializer(user, user_locations).data()
+            return Response(return_hash, status=status.HTTP_200_OK)
+        except:
+            return Response({'status': 'error'}, status=status.HTTP_400_BAD_REQUEST)
