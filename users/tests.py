@@ -126,7 +126,7 @@ class UpdateUserPhoto(APITestCase):
         user_location = UserLocations.objects.create(users=user, locations=location, photo_url=url)
 
         response = self.client.patch(
-            f'/api/v1/users/{user.id}/landmarks/{user_location.id}/?photo_url={new_url}', format='json'
+            f'/api/v1/users/{user.id}/landmarks/{location.id}/?photo_url={new_url}', format='json'
         )
         self.assertEqual(response.data['user_locations'][0]['photo_url'], 'photos.com')
 
@@ -145,7 +145,7 @@ class UpdateUserPhoto(APITestCase):
         user_location = UserLocations.objects.create(users=user, locations=location, photo_url=url)
 
         response = self.client.patch(
-            f'/api/v1/users/{user.id}/landmarks/{user_location.id}/', format='json'
+            f'/api/v1/users/{user.id}/landmarks/{location.id}/', format='json'
         )
         self.assertEqual(response.data['status'], 'error')
         self.assertEqual(response.status_code, 400)
