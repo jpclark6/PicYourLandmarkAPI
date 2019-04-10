@@ -95,7 +95,6 @@ Returns:
     "profile_url": "www.newpicture.com",
     "user_locations": [
         {
-            "id": 22,
             "name": "Matthews Winters Open Space Park",
             "description": null,
             "lat": 39.68431,
@@ -104,7 +103,6 @@ Returns:
             "photo_url": "www.pictureloc2.com"
         },
         {
-            "id": 21,
             "name": "Sand Creek Park",
             "description": null,
             "lat": 39.75478,
@@ -131,7 +129,6 @@ Returns:
     "profile_url": "www.newpicture.com",
     "user_locations": [
         {
-            "id": 22,
             "name": "Matthews Winters Open Space Park",
             "description": null,
             "lat": 39.68431,
@@ -140,7 +137,6 @@ Returns:
             "photo_url": "www.pictureloc2.com"
         },
         {
-            "id": 21,
             "name": "Sand Creek Park",
             "description": null,
             "lat": 39.75478,
@@ -154,9 +150,9 @@ Returns:
 
 #### Update User's Photo For A Given Location
 
-PATCH */api/v1/users/:user_id/landmarks/:user_locations_id/?photo_url=new_url*
+PATCH */api/v1/users/:user_id/landmarks/:landmark_id/?photo_url=new_url*
 
-Ex. PATCH */api/v1/users/27/landmarks/22/?photo_url=www.new_url.com*
+Ex. PATCH */api/v1/users/27/landmarks/73/?photo_url=www.new_url.com*
 
 Returns:
 
@@ -167,7 +163,6 @@ Returns:
     "profile_url": "www.newpicture.com",
     "user_locations": [
         {
-            "id": 22,
             "name": "Matthews Winters Open Space Park",
             "description": null,
             "lat": 39.68431,
@@ -176,7 +171,6 @@ Returns:
             "photo_url": "www.new_url.com"
         },
         {
-            "id": 21,
             "name": "Sand Creek Park",
             "description": null,
             "lat": 39.75478,
