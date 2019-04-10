@@ -30,6 +30,7 @@ class UserLocationsSerializer:
         for loc in self.user_locations:
             full_loc = Locations.objects.get(pk=loc.locations_id)
             return_hash['user_locations'].append({
+                'id': loc.id,
                 'name': full_loc.name,
                 'description': full_loc.description,
                 'lat': full_loc.lat,
