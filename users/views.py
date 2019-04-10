@@ -84,11 +84,11 @@ class UpdateUserLandmark(APIView):
     """
     def patch(self, request, *args, **kwargs):
         """
-        PATCH /api/v1/users/:id/locations/:id
+        PATCH /api/v1/users/:user_pk/locations/:landmark_pk
         """
         try:
             photo_url = request.query_params.get('photo_url')
-            user_landmark = UserLocations.objects.get(pk=kwargs["landmark_pk"])
+            user_landmark = UserLocations.objects.filter(locations_id=kwargs["landmark_pk"], users_id=kwargs["user_pk"])[0]
             user_landmark.photo_url = photo_url
             user_landmark.save()
             user = Users.objects.get(pk=kwargs["user_pk"])
