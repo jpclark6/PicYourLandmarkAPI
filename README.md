@@ -5,6 +5,7 @@ This is a Django API to serve up the app [Pic Your Landmark](https://github.com/
 ## Endpoints
 
 Root endpoint: https://pic-landmark-api.herokuapp.com
+
 Example endpoint: https://pic-landmark-api.herokuapp.com/api/v1/locations/?lat=39.665196&lon=-105.205788
 
 #### Get new landmarks at location
